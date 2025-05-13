@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 exports.addIncome = async (req, res) => {
   const { UserID, title, amount, category, description, date } = req.body;
   // const userID=req.user.id;
-  console.log("user : ", req.body);
   const income = IncomeSchema({
     title,
     amount,
@@ -29,14 +28,11 @@ exports.addIncome = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }
-
-  console.log(income);
 };
 
 exports.getIncomes = async (req, res) => {
   const token = req.cookies.access_token;
   const UserID = jwt.verify(token, "sec_key");
-  console.log("token", UserID);
   try {
     const incomes = await IncomeSchema.find({ userOwner: UserID.id }).sort({
       createdAt: -1,

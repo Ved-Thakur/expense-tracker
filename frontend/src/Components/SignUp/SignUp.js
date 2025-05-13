@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 import { useGlobalContext } from "../../context/globalContext";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [_, setCookies] = useCookies(["access_token"]);
   const { isSubmit, setIsSubmit } = useGlobalContext();
   var flag = false;
 
@@ -56,14 +58,26 @@ const SignUp = () => {
     e.preventDefault();
     const errors = validateForm(user);
     setFormErrors(errors);
-    setIsSubmit(Object.keys(errors).length === 0); // Set isSubmit to true if there are no errors
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+    // setIsSubmit(Object.keys(errors).length === 0); // Set isSubmit to true if there are no errors
     try {
       await axios.post("http://localhost:5000/expense/register", {
         username: user.username,
         email: user.email,
         password: user.password,
       });
-      navigate("/login");
+      const result = await axios.post("http://localhost:5000/expense/login", {
+        username: user.username,
+        password: user.password,
+      });
+      setCookies("access_token", result.data.token);
+      window.localStorage.setItem("userID", result.data.userID);
+      window.localStorage.setItem("username", result.data.username);
+      navigate("/dashboard");
+
+      // navigate("/login");
     } catch (error) {
       alert("Username already exists");
       console.log(error);

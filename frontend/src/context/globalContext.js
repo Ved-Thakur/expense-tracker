@@ -16,7 +16,6 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate incomes
   const addIncome = async (income) => {
-    console.log("Income: ", income);
     const response = await axios
       .post(`${BASE_URL}add-income`, income)
       .catch((err) => {
@@ -26,7 +25,6 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getIncomes = async () => {
-    console.log("get incomes called");
     try {
       const response = await axios.get(`${BASE_URL}get-incomes`, {
         headers: {
@@ -66,7 +64,6 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate incomes
   const addExpense = async (expense) => {
-    console.log("Expense: ", expense);
     const response = await axios
       .post(`${BASE_URL}add-expense`, expense)
       .catch((err) => {
@@ -83,7 +80,6 @@ export const GlobalProvider = ({ children }) => {
         },
         withCredentials: true,
       });
-      console.log(response.data);
       setExpenses(response.data);
     } catch (err) {
       setError(err.response.data.message);
@@ -132,7 +128,6 @@ export const GlobalProvider = ({ children }) => {
 
     function updateState(newState) {
       if (!Object.is(ref.current, newState)) {
-        console.log(newState);
         ref.current = newState;
         forceRender((s) => !s);
       }
@@ -173,7 +168,6 @@ export const GlobalProvider = ({ children }) => {
       e.preventDefault();
 
       const total = totalBalance();
-      console.log("hello", total);
       if (expenseInputState.current.amount > total) {
         setCheck(true);
         return;
@@ -202,7 +196,6 @@ export const GlobalProvider = ({ children }) => {
 
   const handleIncomeSubmit = (e) => {
     if (e) {
-      console.log("in here");
       e.preventDefault();
     }
     addIncome(incomeInputState.current);

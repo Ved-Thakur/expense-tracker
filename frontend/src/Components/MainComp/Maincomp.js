@@ -37,7 +37,6 @@ function Maincomp() {
       onCommand: (commandData) => {
         switch (commandData.command) {
           case "set_income_title":
-            console.log("income title");
             setIncomeInputState({
               ...incomeInputState.current,
               title: commandData.data,
@@ -80,7 +79,6 @@ function Maincomp() {
             break;
 
           case "set_expense_title":
-            console.log(commandData.data);
             setExpenseInputState({
               ...expenseInputState.current,
               title: commandData.data,
@@ -147,7 +145,6 @@ function Maincomp() {
   return (
     <Main>
       {orbMemo}
-
       {isSubmit ? (
         <MainLayout>
           <Navigation active={active} setActive={setActive} />

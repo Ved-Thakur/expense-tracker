@@ -18,7 +18,6 @@ exports.addUser = async (req, res) => {
       password: hashedPassword,
     });
     await newUser.save();
-    console.log(newUser.id);
     res.json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
@@ -53,7 +52,6 @@ exports.getUser = async (req, res) => {
 };
 
 exports.verifyToken = (req, res, next) => {
-  console.log("did we reach here");
   const authHeader = req.body.headers.Authorization;
 
   if (!authHeader) {

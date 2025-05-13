@@ -25,8 +25,6 @@ function Dashboard() {
 
   const [...hist] = transactionHistory();
   const history = hist.slice(0, 3);
-  console.log(hist);
-  console.log(history);
 
   return (
     <DashboardStyled>

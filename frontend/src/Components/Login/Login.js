@@ -49,13 +49,10 @@ function Login({ setUserState }) {
         username: user.username,
         password: user.password,
       });
-      console.log(result.data);
       setCookies("access_token", result.data.token);
       window.localStorage.setItem("userID", result.data.userID);
       window.localStorage.setItem("username", result.data.username);
-      console.log("UserId:   ", window.localStorage.getItem("userID"));
-      console.log("Username:   ", window.localStorage.getItem("username"));
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }

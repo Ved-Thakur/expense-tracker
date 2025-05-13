@@ -13,7 +13,6 @@ const Transaction = () => {
       <h1>Transactions</h1>
       {history.map((item) => {
         const { _id, title, amount, type, date, description } = item;
-        console.log(dollar);
         return (
           <div className="List">
             <div key={_id} className="history-item">

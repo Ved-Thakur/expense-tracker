@@ -50,7 +50,6 @@ function ExpenseForm() {
   //     const total = totalBalance();
   //     console.log(inputState.amount, total);
   //     if (inputState.amount > total) {
-  //       console.log(inputState.amount, total);
   //       setCheck(true);
   //       return;
   //     }
